@@ -55,9 +55,9 @@ module.exports = {
   },
 
   async updateRequirement(req, res) {
-    if (!req.params.id || !req.body.creator || !req.body.title || !req.body.description) return res.sendStatus(400);
+    if (!req.params.id || !req.body.title || !req.body.description) return res.sendStatus(400);
     try {
-      const response = await _datastore.updateRequirement(req.params.id, req.body.creator, req.body.title, req.body.description);
+      const response = await _datastore.updateRequirement(req.params.id, req.body.title, req.body.description);
       if (response) {
         return res.sendStatus(200);
       } else {
@@ -82,13 +82,52 @@ module.exports = {
     }
   },
 
-  async createRequirementComments(req, res) {
+  async createRequirementComment(req, res) {
+    if (!req.body.id || !req.body.creator || !req.body.description) return res.sendStatus(400);
+    try {
+      const response = await _datastore.createRequirementComment({
+        id: req.body.id,
+        creator: req.body.creator,
+        date: _utils.getCurrentDate(),
+        timestamp: _utils.getTimestamp(),
+        description: req.body.description
+      });
+      if (response) {
+        return res.sendStatus(200);
+      } else {
+        return res.sendStatus(400);
+      }
+    } catch (e) {
+      return res.sendStatus(500);
+    }
   },
 
-  async updateRequirementComments(req, res) {
+  async updateRequirementComment(req, res) {
+    if (!req.params.id || !req.body.id || !req.body.description) return res.sendStatus(400);
+    try {
+      const response = await _datastore.updateRequirementComment(req.params.id, req.body.id, req.body.description);
+      if (response) {
+        return res.sendStatus(200);
+      } else {
+        return res.sendStatus(400);
+      }
+    } catch (e) {
+      return res.sendStatus(500);
+    }
   },
 
-  async deleteRequirementComments(req, res) {
+  async deleteRequirementComment(req, res) {
+    if (!req.params.id || !req.params.commentId) return res.sendStatus(400);
+    try {
+      const response = await _datastore.deleteRequirementComment(req.params.id, req.params.commentId);
+      if (response) {
+        return res.sendStatus(200);
+      } else {
+        return res.sendStatus(400);
+      }
+    } catch {
+      return res.sendStatus(500);
+    }
   },
 
   async updateRequirementVote(req, res) {

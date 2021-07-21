@@ -46,8 +46,13 @@ module.exports = {
       if (err) {
         reject(err);
       } else {
-        _db = _db.map(item => item.id == id ? { user, pass, email } : item);
-        resolve(true);
+        const index = _db.findIndex(item => item.id == id);
+        if (index > -1) {
+          _db[index] = { ..._db[index], user, pass, email };
+          resolve(true);
+        } else {
+          resolve(false);
+        }
       }
     });
   },

@@ -21,12 +21,14 @@ module.exports = [
         id: 1,
         creator: 2,
         date: '2021-07-19 15:57:33',
+        timestamp: 1626854346,
         description: '<p>Postularé en otra ocasión</p>',
       },
       {
         id: 2,
         creator: 3,
         date: '2021-07-19 15:59:20',
+        timestamp: 1626854346,
         description: '<p>Estoy participando</p>',
       }
     ]
@@ -52,12 +54,14 @@ module.exports = [
         id: 1,
         creator: 1,
         date: '2021-07-19 15:08:11',
+        timestamp: 1626854346,
         description: '<p>Revisaré esa prueba</p>',
       },
       {
         id: 2,
         creator: 3,
         date: '2021-07-19 15:20:13',
+        timestamp: 1626854346,
         description: '<p>Estoy participando</p>',
       }
     ]
@@ -84,12 +88,14 @@ module.exports = [
         id: 1,
         creator: 2,
         date: '2021-07-20 22:05:22',
+        timestamp: 1626854346,
         description: '<p>Muy interesante</p>',
       },
       {
         id: 2,
         creator: 4,
         date: '2021-07-20 23:10:33',
+        timestamp: 1626854346,
         description: '<p>Seguir con el framework</p>',
       }
     ]
@@ -116,6 +122,7 @@ module.exports = [
         id: 1,
         creator: 3,
         date: '2021-07-20 21:11:15',
+        timestamp: 1626854346,
         description: '<p>Bastante potente</p>',
       }
     ]

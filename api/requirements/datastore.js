@@ -36,14 +36,19 @@ module.exports = {
     });
   },
 
-  async updateRequirement(id, creator, title, description) { // Actualizar requerimiento en la base de datos
+  async updateRequirement(id, title, description) { // Actualizar requerimiento en la base de datos
     const err = false;
     return new Promise((resolve, reject) => {
       if (err) {
         reject(err);
       } else {
-        _db = _db.map(item => item.id == id ? { ...item, creator, title, description } : item);
-        resolve(true);
+        const index = _db.findIndex(item => item.id == id);
+        if (index > -1) {
+          _db[index] = { ..._db[index], title, description };
+          resolve(true);
+        } else {
+          resolve(false);
+        }
       }
     });
   },
@@ -65,13 +70,66 @@ module.exports = {
     });
   },
 
-  async createRequirementComments() {
+  async createRequirementComment(comment) {
+    const err = false;
+    return new Promise((resolve, reject) => {
+      if (err) {
+        reject(err);
+      } else {
+        const index = _db.findIndex(item => item.id == comment.id);
+        if (index > -1) {
+          const ordered = _db[index].comments.sort((a, b) => a.id - b.id);
+          _db[index].comments.push({ ...comment, id: ordered[ordered.length - 1].id + 1 });
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      }
+    });
   },
 
-  async updateRequirementComments() {
+  async updateRequirementComment(id, commentId, description) {
+    const err = false;
+    return new Promise((resolve, reject) => {
+      if (err) {
+        reject(err);
+      } else {
+        const index = _db.findIndex(item => item.id == id);
+        if (index > -1) {
+          const subindex = _db[index].comments.findIndex(item => item.id == commentId);
+          if (subindex > -1) {
+            _db[index].comments[subindex] = { ..._db[index].comments[subindex], description };
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        } else {
+          resolve(false);
+        }
+      }
+    });
   },
 
-  async deleteRequirementComments() {
+  async deleteRequirementComment(id, commentId) {
+    const err = false;
+    return new Promise((resolve, reject) => {
+      if (err) {
+        reject(err);
+      } else {
+        const index = _db.findIndex(item => item.id == id);
+        if (index > -1) {
+          const subindex = _db[index].comments.findIndex(item => item.id == commentId);
+          if (subindex > -1) {
+            _db[index].comments.splice(subindex, 1);
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        } else {
+          resolve(false);
+        }
+      }
+    });
   },
 
   async updateRequirementVote(id, userId, old, vote) { // Actualizar las votaciones en el requerimiento en la base de datos

@@ -10,9 +10,9 @@ router.getAsync('/:id', handler.readRequirement);
 router.patchAsync('/:id', handler.updateRequirement);
 router.deleteAsync('/:id', handler.deleteRequirement);
 
-router.postAsync('/comments', handler.createRequirementComments);
-router.patchAsync('/comments/:id', handler.updateRequirementComments);
-router.deleteAsync('/comments/:id', handler.deleteRequirementComments);
+router.postAsync('/comments', handler.createRequirementComment);
+router.patchAsync('/comments/:id', handler.updateRequirementComment);
+router.deleteAsync('/comments/:id/:commentId', handler.deleteRequirementComment);
 
 router.patchAsync('/vote/:id', handler.updateRequirementVote);
 
