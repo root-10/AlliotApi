@@ -64,7 +64,6 @@ module.exports = {
         return res.sendStatus(400);
       }
     } catch (e) {
-      console.log(e);
       return res.sendStatus(500);
     }
   },
@@ -79,6 +78,32 @@ module.exports = {
         return res.sendStatus(400);
       }
     } catch {
+      return res.sendStatus(500);
+    }
+  },
+
+  async createRequirementComments(req, res) {
+  },
+
+  async updateRequirementComments(req, res) {
+  },
+
+  async deleteRequirementComments(req, res) {
+  },
+
+  async updateRequirementVote(req, res) {
+    if (req.body.old) {
+      if (req.body.old !== 'positive' && req.body.old !== 'negative') return res.sendStatus(400);
+    }
+    if (!req.params.id || !req.body.id) return res.sendStatus(400);
+    try {
+      const response = await _datastore.updateRequirementVote(req.params.id, req.body.id, req.body.old, req.body.vote);
+      if (response) {
+        return res.sendStatus(200);
+      } else {
+        return res.sendStatus(400);
+      }
+    } catch (e) {
       return res.sendStatus(500);
     }
   }

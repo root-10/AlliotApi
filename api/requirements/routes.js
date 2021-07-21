@@ -10,4 +10,10 @@ router.getAsync('/:id', handler.readRequirement);
 router.patchAsync('/:id', handler.updateRequirement);
 router.deleteAsync('/:id', handler.deleteRequirement);
 
+router.postAsync('/comments', handler.createRequirementComments);
+router.patchAsync('/comments/:id', handler.updateRequirementComments);
+router.deleteAsync('/comments/:id', handler.deleteRequirementComments);
+
+router.patchAsync('/vote/:id', handler.updateRequirementVote);
+
 module.exports = router;
