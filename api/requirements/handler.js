@@ -103,9 +103,9 @@ module.exports = {
   },
 
   async updateRequirementComment(req, res) {
-    if (!req.params.id || !req.body.id || !req.body.description) return res.sendStatus(400);
+    if (!req.params.id || !req.params.commentId || !req.body.description) return res.sendStatus(400);
     try {
-      const response = await _datastore.updateRequirementComment(req.params.id, req.body.id, req.body.description);
+      const response = await _datastore.updateRequirementComment(req.params.id, req.params.commentId, req.body.description);
       if (response) {
         return res.sendStatus(200);
       } else {
