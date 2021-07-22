@@ -25,8 +25,8 @@ module.exports = {
         user: req.body.user,
         pass: req.body.pass,
         email: req.body.email,
-        date: _utils.getCurrentDate(),
-        timestamp: _utils.getTimestamp(),
+        creation_date: _utils.getCurrentDate(),
+        creation_timestamp: _utils.getTimestamp(),
       });
       if (response) {
         return res.sendStatus(200);

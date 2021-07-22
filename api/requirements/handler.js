@@ -23,8 +23,8 @@ module.exports = {
     try {
       const response = await _datastore.createRequirement({
         creator: req.body.creator,
-        date: _utils.getCurrentDate(),
-        timestamp: _utils.getTimestamp(),
+        creation_date: _utils.getCurrentDate(),
+        creation_timestamp: _utils.getTimestamp(),
         title: req.body.title,
         description: req.body.description,
         vote: [],
@@ -88,8 +88,8 @@ module.exports = {
       const response = await _datastore.createRequirementComment({
         id: req.body.id,
         creator: req.body.creator,
-        date: _utils.getCurrentDate(),
-        timestamp: _utils.getTimestamp(),
+        creation_date: _utils.getCurrentDate(),
+        creation_timestamp: _utils.getTimestamp(),
         description: req.body.description
       });
       if (response) {
