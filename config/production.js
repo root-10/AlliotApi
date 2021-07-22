@@ -1,7 +1,7 @@
 module.exports = {
   server: {
-    port: process.env.PORT,
-    host: process.env.HOST,
+    port: 80,
+    host: 'production',
   },
   logger: ':method :url :status :res[content-length] - :response-time ms'
 };
