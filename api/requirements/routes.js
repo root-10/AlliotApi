@@ -14,6 +14,6 @@ router.postAsync('/comments', handler.createRequirementComment);
 router.patchAsync('/comments/:id', handler.updateRequirementComment);
 router.deleteAsync('/comments/:id/:commentId', handler.deleteRequirementComment);
 
-router.patchAsync('/vote/:id', handler.updateRequirementVote);
+router.patchAsync('/votes/:id', handler.updateRequirementVote);
 
 module.exports = router;
