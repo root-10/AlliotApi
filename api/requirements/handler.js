@@ -82,6 +82,15 @@ module.exports = {
     }
   },
 
+  async getRequirementsQuantity(req, res) {
+    try {
+      const quantity = await _datastore.getRequirementsQuantity();
+      return res.send({ quantity });
+    } catch {
+      return res.sendStatus(500);
+    }
+  },
+
   async createRequirementComment(req, res) {
     if (!req.body.id || !req.body.creator || !req.body.description) return res.sendStatus(400);
     try {

@@ -70,6 +70,18 @@ module.exports = {
     });
   },
 
+  async getRequirementsQuantity() { // Obtener la cantidad de requerimientos
+    const err = false;
+    return new Promise((resolve, reject) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(_db.length);
+        resolve(_db.length);
+      }
+    });
+  },
+
   async createRequirementComment(comment) {
     const err = false;
     return new Promise((resolve, reject) => {
