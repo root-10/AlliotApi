@@ -29,7 +29,7 @@ module.exports = {
         creation_timestamp: _utils.getTimestamp(),
       });
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }
@@ -57,7 +57,7 @@ module.exports = {
     try {
       const response = await _datastore.updateUser(req.params.id, req.body.user, req.body.pass, req.body.email);
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }
@@ -71,7 +71,7 @@ module.exports = {
     try {
       const response = await _datastore.deleteUser(req.params.id);
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }

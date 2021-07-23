@@ -7,13 +7,15 @@ module.exports = {
     try {
       const page = parseInt((req.query.page || 1).toString(), 10);
       const limit = parseInt((req.query.limit || 10).toString(), 10);
-      const requirements = await _datastore.getRequirements(page, limit);
+      const option = parseInt((req.query.option || 0).toString(), 10);
+      const requirements = await _datastore.getRequirements(page, limit, option);
       if (requirements.length) {
         return res.send(requirements);
       } else {
         return res.sendStatus(400);
       }
-    } catch {
+    } catch (e) {
+      console.log(e);
       return res.sendStatus(500);
     }
   },
@@ -27,15 +29,19 @@ module.exports = {
         creation_timestamp: _utils.getTimestamp(),
         title: req.body.title,
         description: req.body.description,
-        vote: [],
+        vote: {
+          positive: [],
+          negative: []
+        },
         comments: []
       });
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }
-    } catch {
+    } catch  (e) {
+      console.log(e);
       return res.sendStatus(500);
     }
   },
@@ -59,7 +65,7 @@ module.exports = {
     try {
       const response = await _datastore.updateRequirement(req.params.id, req.body.title, req.body.description);
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }
@@ -73,7 +79,7 @@ module.exports = {
     try {
       const response = await _datastore.deleteRequirement(req.params.id);
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }
@@ -102,11 +108,12 @@ module.exports = {
         description: req.body.description
       });
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }
     } catch (e) {
+      console.log(e);
       return res.sendStatus(500);
     }
   },
@@ -116,7 +123,7 @@ module.exports = {
     try {
       const response = await _datastore.updateRequirementComment(req.params.id, req.params.commentId, req.body.description);
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }
@@ -130,7 +137,7 @@ module.exports = {
     try {
       const response = await _datastore.deleteRequirementComment(req.params.id, req.params.commentId);
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }
@@ -143,11 +150,11 @@ module.exports = {
     if (req.body.old) {
       if (req.body.old !== 'positive' && req.body.old !== 'negative') return res.sendStatus(400);
     }
-    if (!req.params.id || !req.body.id) return res.sendStatus(400);
+    if (!req.params.id || !req.body.userId) return res.sendStatus(400);
     try {
       const response = await _datastore.updateRequirementVote(req.params.id, req.body.userId, req.body.old, req.body.vote);
       if (response) {
-        return res.sendStatus(200);
+        return res.send({ ok: response });
       } else {
         return res.sendStatus(400);
       }

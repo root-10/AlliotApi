@@ -109,11 +109,10 @@ module.exports = [
     description: '<p>Desarrollo con Angular Muy buen framework para proyectos grandes</p>',
     vote: {
       positive: [
-        3,
+        2,
       ],
       negative: [
         1,
-        2,
         4
       ]
     },
