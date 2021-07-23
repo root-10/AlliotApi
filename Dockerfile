@@ -13,4 +13,4 @@ COPY . .
 EXPOSE 8080
 
 # Inicia la api utilizando la configuración de producción
-CMD npm run start:prod
+CMD npm run start:dev
